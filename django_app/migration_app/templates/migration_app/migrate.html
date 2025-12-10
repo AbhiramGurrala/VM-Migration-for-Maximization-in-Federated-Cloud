@@ -1,0 +1,14 @@
+{% extends 'migration_app/base.html' %}
+{% block content %}
+  <h2>Migrate user: {{ username }}</h2>
+  <p>Current VM: <strong>{{ source }}</strong></p>
+  <form method="post">{% csrf_token %}
+    <label>Destination VM:
+      <select name="dest">
+        {% for v in vms %}{% if v != source %}<option>{{ v }}</option>{% endif %}{% endfor %}
+      </select>
+    </label>
+    <p><label>Confirm password (for demo): <input name="password" type="password" required></label></p>
+    <button type="submit">Start Migration</button>
+  </form>
+{% endblock %}
